@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Header from './Header/Header'
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import ItemBox from './components/ItemBox';
 //import logo from './logo.svg';
 import './App.css';
 
@@ -9,6 +11,8 @@ class App extends Component {
     return(
       <div>
         <Header title="Movies"/>
+        <SearchBar />
+        <ItemBox />
       </div>
     );
   }

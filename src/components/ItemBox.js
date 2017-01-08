@@ -1,27 +1,20 @@
 import React , { Component } from 'react';
 import ItemList from './ItemList';
+import {fetchData} from '../utils';
 
 class ItemBox extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {data:[]};
   }
+
   componentDidMount() {
     var url ="https://api.themoviedb.org/3/discover/movie";
-    var key = "?api_key=4d4ed145d3584846f5922b6a467e1f85";
-
-  fetch(
-    url+key
-  ).then(response => {
-    return response.json();
-  }).then(function(json){
-    //console.log('json: ' + JSON.stringify(json));
-    this.setState({data:json.results});
-  }.bind(this)).catch((e) => {
-    console.log("Fetch error: " + e);
-  });
-
+    fetchData(url, data=>{
+      this.setState({data:data});
+    });
   }
+
   render() {
     return (
       <div>

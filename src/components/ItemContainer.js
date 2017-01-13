@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import ItemList from './ItemList';
 import {fetchData} from '../utils';
 
-class ItemBox extends Component {
+class ItemContainer extends Component {
   constructor(props){
     super(props);
     this.state = {data:[]};
@@ -18,10 +18,10 @@ class ItemBox extends Component {
   render() {
     return (
       <div>
-        <ItemList data={this.state.data} />
+         <ItemList data={this.state.data} />
       </div>
     );
   }
 }
 
-export default ItemBox;
+export default ItemContainer;

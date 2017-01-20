@@ -16,7 +16,10 @@ export default class MovieList extends Component {
   componentDidMount() {
     var url = URL_LIST + API_KEY;
 
-    fetchData(url).then(data=>{
+    fetchData(url)
+    .then(data => {
+      return data.results;
+    }).then(data=>{
       this.setState({data:data});
     });
   }

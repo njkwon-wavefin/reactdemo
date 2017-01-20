@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import {Link} from 'react-router';
+import {URL_IMG, IMG_SIZE} from '../const';
 
 /*
 function getImg(id,path,desc){
@@ -26,18 +27,11 @@ class Item extends Component{
 
 
   render(){
-
-    var imgUrl = "https://image.tmdb.org/t/p/";
-    var imgSize = "w185";
-    var src = imgUrl+imgSize+this.props.item.poster_path;
-    var path = this.props.item.poster_path;
-    console.log('src: ' + src);
-    console.log('poster_path: ' + path);
     return(
         /*
         <Link to={'/movie/'+this.props.item.id}><img key={this.props.item.id} src={imgUrl+imgSize+this.props.item.poster_path} alt={this.props.item.title} /></Link>
         */
-        <img key={this.props.item.id} src={imgUrl+imgSize+this.props.item.poster_path} alt={this.props.item.title} />
+        <img key={this.props.item.id} src={URL_IMG+IMG_SIZE+this.props.item.poster_path} alt={this.props.item.title} />
     );
 
     /*

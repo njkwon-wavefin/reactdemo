@@ -14,9 +14,9 @@ export default class MovieDetail extends Component {
   }
 
   componentDidMount() {
-    var url_movie = URL_DETAIL + this.props.params.id + API_KEY;
-    var url_casts = URL_DETAIL + this.props.params.id + URL_CAST + API_KEY;
-    var url_trailers = URL_DETAIL + this.props.params.id + URL_VIDEO + API_KEY;
+    const url_movie = URL_DETAIL + this.props.params.id + API_KEY;
+    const url_casts = URL_DETAIL + this.props.params.id + URL_CAST + API_KEY;
+    const url_trailers = URL_DETAIL + this.props.params.id + URL_VIDEO + API_KEY;
 
     fetchData(url_movie)
     .then(data => this.setState({movie:data}) );
@@ -33,7 +33,7 @@ export default class MovieDetail extends Component {
       return data.results;
     }).then(data => {
       var youtubeTrailers = data.filter(function(trailer){
-        return trailer.site == 'YouTube';
+        return trailer.site === 'YouTube';
       });
       this.setState({trailers:youtubeTrailers.slice(0,TRAILER_MAX_NUM)});
     });
@@ -50,7 +50,7 @@ export default class MovieDetail extends Component {
         </div>
       );
     }else{
-      return <div>loading...</div>
+      return null;
     }
   }
 

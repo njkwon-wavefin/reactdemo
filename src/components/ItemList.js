@@ -6,7 +6,7 @@ class ItemList extends Component{
   render() {
     var items = this.props.data.map(function(item) {
       return(
-          <Link to ={'/movie/'+item.id} key={item.id} ><Item item={item} /></Link>
+          <Link to={'/movie/'+item.id} key={item.id} ><Item item={item} /></Link>
       );
     });
 

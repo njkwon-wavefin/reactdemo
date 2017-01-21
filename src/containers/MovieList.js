@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {URL_LIST, API_KEY} from '../const';
 import ItemList from '../components/ItemList';
 import {fetchData} from '../utils';
+import {Grid, Row} from 'react-bootstrap/lib';
 
 export default class MovieList extends Component {
 
@@ -14,7 +15,7 @@ export default class MovieList extends Component {
   }
 
   componentDidMount() {
-    var url = URL_LIST + API_KEY;
+    const url = URL_LIST + API_KEY;
 
     fetchData(url)
     .then(data => {
@@ -27,12 +28,14 @@ export default class MovieList extends Component {
   render() {
     if(Object.keys(this.state.data).length !== 0) {
       return (
-        <div>
-           <ItemList data={this.state.data} />
-        </div>
+        <Grid>
+          <Row>
+            <ItemList data={this.state.data} />
+          </Row>
+        </Grid>
       );
     }else{
-      return <div>loading...</div>
+      return null;
     }
   }
 }

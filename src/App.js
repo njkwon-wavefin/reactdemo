@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return(
       <div>
-        <Header title="Movies"/>
-        <SearchBar />
+        <Header title="Cinema Paradiso"/>
+        <SearchBar brand="Movies" />
         {this.props.children}
       </div>
     );

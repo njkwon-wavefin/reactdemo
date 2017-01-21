@@ -1,15 +1,15 @@
-import React , { Component } from 'react';
-import './Header.css';
+import React from 'react';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 
-/*
-class Header extends Component {
-  render(){
-    return(<div className="Header">{this.props.title}</div>);
-  }
-}
-*/
+export default function Header(props){
+  const style = {
+    textAlign: 'center',
+    borderBottom: 'none',
+    marginTop: 0,
+    marginBottom: 0
+  };
 
-function Header(props){
-  return (<div className="Header">{props.title}</div>);
+  return (
+    <PageHeader style={style}>{props.title}</PageHeader>
+  );
 }
-export default Header;

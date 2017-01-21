@@ -1,5 +1,4 @@
 import React , { Component } from 'react';
-import {Link} from 'react-router';
 import {URL_IMG, IMG_SIZE} from '../const';
 
 /*

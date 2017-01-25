@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {URL_LIST, API_KEY} from '../const';
-import ItemList from '../components/ItemList';
+import MovieList from '../components/MovieList';
 import {fetchData} from '../utils';
 import {Grid, Row} from 'react-bootstrap/lib';
 
-export default class MovieList extends Component {
+export default class MovieContainer extends Component {
 
   constructor(props){
     super(props);
@@ -28,9 +28,9 @@ export default class MovieList extends Component {
   render() {
     if(Object.keys(this.state.data).length !== 0) {
       return (
-        <Grid>
+        <Grid fluid={this.props.fluid}>
           <Row>
-            <ItemList data={this.state.data} />
+            <MovieList data={this.state.data} />
           </Row>
         </Grid>
       );

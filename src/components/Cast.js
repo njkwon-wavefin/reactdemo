@@ -1,11 +1,12 @@
 import React , { Component } from 'react';
-import {URL_IMG, IMG_SIZE} from '../const';
+import {Image} from 'react-bootstrap/lib';
+import {URL_IMG, IMG_SIZE_SMALL} from '../const';
 
 export default class Cast extends Component{
   render(){
 
     return(
-        <img key={this.props.cast.id} src={URL_IMG+IMG_SIZE+this.props.cast.profile_path} alt={this.props.cast.name} />
+        <Image key={this.props.cast.id} src={URL_IMG+IMG_SIZE_SMALL+this.props.cast.profile_path} alt={this.props.cast.name} rounded />
     );
   }
 }

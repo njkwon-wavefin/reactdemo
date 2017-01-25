@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Item, CastList, TrailerList} from '../components';
+import { MoviePoster, CastList, TrailerList} from '../components';
 import { fetchData } from '../utils';
 import { URL_DETAIL, URL_CAST, URL_VIDEO, API_KEY, CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
+import {Grid, Row, Col} from 'react-bootstrap/lib';
+import { MovieInfo } from '../components';
 
 export default class MovieDetail extends Component {
   constructor(props){
@@ -43,11 +45,20 @@ export default class MovieDetail extends Component {
   render() {
     if(Object.keys(this.state.movie).length !== 0) {
       return(
-        <div>
-          <Item item={this.state.movie} />
-          <CastList data={this.state.casts} />
-          <TrailerList data={this.state.trailers} />
-        </div>
+        <Grid fluid={true}>
+          <Row>
+            <Col md={3}>
+              <MoviePoster movie={this.state.movie} />
+            </Col>
+            <Col md={9}>
+              <MovieInfo movie={this.state.movie}/>
+              <CastList data={this.state.casts} />
+            </Col>
+          </Row>
+          <Row>
+            <TrailerList data={this.state.trailers} />
+          </Row>
+        </Grid>
       );
     }else{
       return null;

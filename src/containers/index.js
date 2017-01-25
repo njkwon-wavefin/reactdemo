@@ -1,4 +1,4 @@
-import MovieList from './MovieList';
+import MovieContainer from './MovieContainer';
 import MovieDetail from './MovieDetail';
 
-export {MovieList, MovieDetail};
+export {MovieContainer, MovieDetail};

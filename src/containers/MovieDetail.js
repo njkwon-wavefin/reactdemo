@@ -42,15 +42,17 @@ export default class MovieDetail extends Component {
 
   }
 
+
   render() {
+
     if(Object.keys(this.state.movie).length !== 0) {
       return(
-        <Grid fluid={true}>
+        <Grid fluid={false}>
           <Row>
-            <Col md={3}>
-              <MoviePoster movie={this.state.movie} />
+            <Col xs={12} sm={6} md={4}>
+              <MoviePoster movie={this.state.movie} responsive={true} />
             </Col>
-            <Col md={9}>
+            <Col xs={12} sm={6} md={8}>
               <MovieInfo movie={this.state.movie}/>
               <CastList data={this.state.casts} />
             </Col>

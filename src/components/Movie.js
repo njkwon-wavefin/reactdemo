@@ -12,41 +12,46 @@ export default class Movie extends Component{
 
 export function MoviePoster(props){
   return(
-    <Image key={props.movie.id} src={URL_IMG+IMG_SIZE_LARGE+props.movie.poster_path} alt={props.movie.title} responsive />
+    <Image key={props.movie.id} src={URL_IMG+IMG_SIZE_LARGE+props.movie.poster_path} alt={props.movie.title} responsive={props.responsive} />
   );
 }
 
 export function MovieTitle(props){
   const style = {
-    fontSize : 22
-  }
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  };
   return(
-    <div style={style}>
-      {props.title}
-    </div>
+    <h1 style={style}> {props.title} </h1>
   );
 }
 
 export function MovieRate(props){
   return(
-    <div>
-      <Glyphicon glyph="star" />{props.rate}
-    </div>
+      <h3><Glyphicon glyph="star" /> {props.rate}</h3>
   );
 }
 
 export function MovieVote(props){
   return(
-    <div>
-      <Glyphicon glyph="heart" />{props.vote}
-    </div>
+      <h3><Glyphicon glyph="heart" /> {props.vote}</h3>
   );
 }
 
 export function MovieYear(props){
   return(
-    <div>
-      {props.year}
+    <h3>{props.year}</h3>
+  );
+}
+
+export function MovieGenre(props){
+  const style = {
+    fontSize: '1.6em'
+  };
+
+  return(
+    <div style={style}>
+      {props.genre}
     </div>
   );
 }
@@ -54,7 +59,10 @@ export function MovieYear(props){
 export function MovieOverview(props){
   return(
     <div>
+    <h3>Overview</h3>
+    <p>
       {props.overview}
+    </p>
     </div>
   );
 }

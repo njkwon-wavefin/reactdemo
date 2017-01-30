@@ -2,10 +2,11 @@ import React , { Component } from 'react';
 import {MoviePoster} from './Movie';
 import {Link} from 'react-router';
 import {Col} from 'react-bootstrap';
+import {connect} from 'react-redux';
 
 export default class MovieList extends Component{
   render() {
-    var movies = this.props.data.map(function(movie) {
+    var movies = this.props.movies.map(function(movie) {
       return(
           <Col xs={6} sm={4} md={3} key={movie.id} >
           <Link to={'/movie/'+movie.id} ><MoviePoster movie={movie} responsive={true}/></Link>

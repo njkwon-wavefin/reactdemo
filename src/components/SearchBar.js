@@ -16,9 +16,9 @@ class SearchBar extends Component {
     //console.log('searchText1: ' + ReactDOM.findDOMNode(this.searchTextInput).value);
     console.log('searchText2: ' + e.currentTarget.value.trim());
     let searchText = e.currentTarget.value.trim();
-    if(e.key == 13) {
+    // if(e.key == 13) {
       this.props.dispatch(searchMovieList(searchText));
-    }
+    // }
   }
 
   render(){
@@ -51,10 +51,9 @@ class SearchBar extends Component {
             <FormControl
               type="text"
               placeholder="Search Movie Title..."
-              value={''}
+              value={this.props.input}
               ref={(input) => this.searchTextInput = input}
-              onChange= {this.handleChange}
-              onClick = {this.handleChange}/>
+              onChange= {this.handleChange} />
           </FormGroup>
           {' '}
           <Button type="submit">Search</Button>
@@ -64,6 +63,12 @@ class SearchBar extends Component {
 
     );
   }
+}
+
+function mapStateToProps(state){
+  const {input} = state;
+
+  return {input}
 }
 
 export default connect()(SearchBar);

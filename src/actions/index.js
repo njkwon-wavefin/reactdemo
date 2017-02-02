@@ -144,6 +144,7 @@ export function selectMovie(movie) {
 export function searchMovieList(text){
   let url = URL_SEARCH + text + API_KEY_ALT;
   return function(dispatch){
+    dispatch(enterSearchText(text))
     dispatch(searchMovie())
     return fetch(url)
       .then(response => response.json())

@@ -20,7 +20,7 @@ class MovieContainer extends Component {
     const {movies} = this.props;
     if(movies.length > 0) {
       return(
-        <Grid fluid={true}>
+        <Grid fluid={false}>
           <Row>
             <MovieList movies={movies} />
           </Row>

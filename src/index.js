@@ -5,12 +5,14 @@ import {Provider} from 'react-redux';
 import App from './App';
 import movieApp from './reducers';
 import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import './index.css';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {MovieContainer, MovieDetail} from './containers';
 import {DisplayMsg} from './components';
 
-let store = createStore(movieApp,applyMiddleware(thunkMiddleware));
+const loggerMiddleware = createLogger()
+let store = createStore(movieApp,applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>

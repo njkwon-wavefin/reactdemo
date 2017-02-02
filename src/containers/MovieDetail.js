@@ -1,70 +1,61 @@
 import React, { Component } from 'react';
 import { MoviePoster, CastList, TrailerList} from '../components';
 import { fetchData } from '../utils';
-import { URL_DETAIL, URL_CAST, URL_VIDEO, API_KEY, CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
-import {Grid, Row, Col} from 'react-bootstrap/lib';
+import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
+import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { MovieInfo } from '../components';
+import { connect } from 'react-redux';
+import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../actions';
 
-export default class MovieDetail extends Component {
+class MovieDetail extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      movie:{},
-      casts:[],
-      trailers:[]
-    };
   }
 
   componentDidMount() {
-    const url_movie = URL_DETAIL + this.props.params.id + API_KEY;
-    const url_casts = URL_DETAIL + this.props.params.id + URL_CAST + API_KEY;
-    const url_trailers = URL_DETAIL + this.props.params.id + URL_VIDEO + API_KEY;
-
-    fetchData(url_movie)
-    .then(data => this.setState({movie:data}) );
-
-    fetchData(url_casts)
-    .then(data => {
-      return data.cast;
-    }).then(data => {
-      this.setState({casts:data.slice(0,CAST_MAX_NUM)});
-    });
-
-    fetchData(url_trailers)
-    .then(data => {
-      return data.results;
-    }).then(data => {
-      var youtubeTrailers = data.filter(function(trailer){
-        return trailer.site === 'YouTube';
-      });
-      this.setState({trailers:youtubeTrailers.slice(0,TRAILER_MAX_NUM)});
-    });
-
+    const {dispatch} = this.props;
+    dispatch(fetchMovieDetail(this.props.params.id));
+    dispatch(fetchCastList(this.props.params.id));
+    dispatch(fetchTrailerList(this.props.params.id));
   }
 
 
   render() {
+    const {movie, casts, trailers, isFetcing_movie, isFetcing_casts, isFetcing_trailers} = this.props;
 
-    if(Object.keys(this.state.movie).length !== 0) {
+    if(isFetcing_movie || isFetcing_casts || isFetcing_trailers) {
+      return <p>loading...</p>
+    }
+    if(movie.hasOwnProperty('id')) {
       return(
         <Grid fluid={false}>
           <Row>
             <Col xs={12} sm={6} md={4}>
-              <MoviePoster movie={this.state.movie} responsive={true} />
+              <MoviePoster movie={movie} responsive={true} />
             </Col>
             <Col xs={12} sm={6} md={8}>
-              <MovieInfo movie={this.state.movie}/>
-              <CastList data={this.state.casts} />
+              <MovieInfo movie={movie}/>
+              <CastList data={casts.slice(0,CAST_MAX_NUM)} />
             </Col>
           </Row>
           <Row>
-            <TrailerList data={this.state.trailers} />
+            <TrailerList data={trailers.slice(0,TRAILER_MAX_NUM)} />
           </Row>
         </Grid>
       );
-    }else{
+    } else
       return null;
-    }
-  }
 
+  }
 }
+
+function mapStateToProps(state){
+  const {movieDetail, castList, trailerList} = state;
+  const {isFetcing_movie, item: movie, error_movie} = movieDetail;
+  const {isFetcing_casts, items: casts, error_casts} = castList;
+  const {isFetcing_trailers, items: trailers, error_trailers} = trailerList;
+
+  return {isFetcing_movie, movie, error_movie, isFetcing_casts, casts, error_casts, isFetcing_trailers, trailers, error_trailers}
+}
+
+export default connect(mapStateToProps)(MovieDetail);

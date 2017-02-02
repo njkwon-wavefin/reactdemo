@@ -2,16 +2,23 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Navbar, FormGroup, FormControl, Button, Image} from 'react-bootstrap/lib';
 import TMDBlogo from '../images/themoviedb_green.svg';
+import { connect } from 'react-redux';
+import { searchMovieList } from '../actions';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props){
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(){
-    console.log('input: ' + ReactDOM.findDOMNode(this.searchTextInput).value);
-    this.props.onUserInput(ReactDOM.findDOMNode(this.searchTextInput).value);
+  handleChange(e){
+    //let searchText = ReactDOM.findDOMNode(this.searchTextInput).value;
+    //console.log('searchText1: ' + ReactDOM.findDOMNode(this.searchTextInput).value);
+    console.log('searchText2: ' + e.currentTarget.value.trim());
+    let searchText = e.currentTarget.value.trim();
+    if(e.key == 13) {
+      this.props.dispatch(searchMovieList(searchText));
+    }
   }
 
   render(){
@@ -44,9 +51,10 @@ export default class SearchBar extends Component {
             <FormControl
               type="text"
               placeholder="Search Movie Title..."
-              value={this.props.searchText}
+              value={''}
               ref={(input) => this.searchTextInput = input}
-              onChange= {this.handleChange} />
+              onChange= {this.handleChange}
+              onClick = {this.handleChange}/>
           </FormGroup>
           {' '}
           <Button type="submit">Search</Button>
@@ -57,3 +65,5 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+export default connect()(SearchBar);

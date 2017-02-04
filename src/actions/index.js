@@ -148,8 +148,9 @@ export function searchMovieList(text){
     dispatch(searchMovie())
     return fetch(url)
       .then(response => response.json())
-      .then( json => json.results)
-      .then( data => dispatch(searchMovieSuccess(data)))
+      .then(json => json.results)
+      .then(data => dispatch(searchMovieSuccess(data)))
+      .catch(error => dispatch(searchMovieFail(error)))
   }
 }
 
@@ -172,6 +173,7 @@ export function fetchMovieDetail(id){
     return fetch(url_movie)
       .then(response => response.json())
       .then(data => dispatch(fetchMovieSuccess(data)))
+      .catch(error => dispatch(fetchMovieFail(error)))
   }
 }
 
@@ -183,6 +185,7 @@ export function fetchCastList(id){
       .then(response => response.json())
       .then(json => json.cast)
       .then(data => dispatch(fetchCastsSuccess(data)))
+      .catch(error => dispatch(fetchCastsFail(error)))
   }
 }
 
@@ -198,6 +201,6 @@ export function fetchTrailerList(id){
           return trailer.site === 'YouTube';
         });
         dispatch(fetchTrailersSuccess(youtubeTrailers));
-      })
+      }).catch(error => dispatch(fetchTrailersFail(error)))
   }
 }

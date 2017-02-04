@@ -1,10 +1,11 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux'
+import { routerReducer } from 'react-router-redux'
 import {FETCH_MOVIES, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, RESET_MOVIES,
   FETCH_MOVIE, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_FAILURE,
   FETCH_CASTS, FETCH_CASTS_SUCCESS, FETCH_CASTS_FAILURE,
   FETCH_TRAILERS, FETCH_TRAILERS_SUCCESS, FETCH_TRAILERS_FAILURE,
   SEARCH_MOVIE, SEARCH_MOVIE_SUCCESS, SEARCH_MOVIE_FAILURE,
-  ENTER_SEARCH_TEXT} from '../actions';
+  ENTER_SEARCH_TEXT} from '../actions'
 
 const defaultStateList = {
   isFetching: false,
@@ -15,24 +16,20 @@ const defaultStateList = {
 const movieList = (state = defaultStateList, action) => {
   switch (action.type){
     case FETCH_MOVIES:
-      console.log('FETCH_MOVIES ' + new Date())
       return Object.assign({}, state, {
         isFetching:true
       });
     case FETCH_MOVIES_SUCCESS:
-      console.log('FETCH_MOVIES_SUCCESS '+ new Date())
       return Object.assign({}, state, {
         isFetching:false,
         items:action.data
       });
     case FETCH_MOVIES_FAILURE:
-      console.log('FETCH_MOVIES_FAILURE '+ new Date())
       return Object.assign({}, state, {
         isFetching:false,
         error:action.data
       });
     case RESET_MOVIES:
-      console.log('RESET_MOVIES '+ new Date())
       return Object.assign({}, state, {
         isFetching:false,
         items:[],
@@ -142,7 +139,8 @@ const movieApp = combineReducers({
   castList,
   trailerList,
   movieDetail,
-  input
+  input,
+  routing: routerReducer
 });
 
 export default movieApp;

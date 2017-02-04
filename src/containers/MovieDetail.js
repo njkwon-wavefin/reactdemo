@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MoviePoster, CastList, TrailerList} from '../components';
-import { fetchData } from '../utils';
 import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
 import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { MovieInfo } from '../components';
@@ -8,9 +7,6 @@ import { connect } from 'react-redux';
 import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../actions';
 
 class MovieDetail extends Component {
-  constructor(props){
-    super(props);
-  }
 
   componentDidMount() {
     const {dispatch} = this.props;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MovieList from '../components/MovieList';
-import { fetchData } from '../utils';
 import { Grid, Row } from 'react-bootstrap/lib';
 import { connect } from 'react-redux';
 import { fetchMovieList } from '../actions';

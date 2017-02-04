@@ -2,7 +2,6 @@ import React , { Component } from 'react';
 import {MoviePoster} from './Movie';
 import {Link} from 'react-router';
 import {Col} from 'react-bootstrap';
-import {connect} from 'react-redux';
 
 export default class MovieList extends Component{
   render() {
@@ -15,7 +14,7 @@ export default class MovieList extends Component{
           </Col>
         );
     });
-    console.log('movies:' + movies);
+
     return(
       <div>
         {movies}

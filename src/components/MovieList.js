@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import {MoviePoster} from './Movie';
 import {Link} from 'react-router';
-import {Col} from 'react-bootstrap';
+import { Grid, Row, Col} from 'react-bootstrap';
 
 export default class MovieList extends Component{
   render() {
@@ -16,9 +16,11 @@ export default class MovieList extends Component{
     });
 
     return(
-      <div>
-        {movies}
-      </div>
+      <Grid fluid={false}>
+        <Row>
+          {movies}
+        </Row>
+      </Grid>
     );
   }
 }

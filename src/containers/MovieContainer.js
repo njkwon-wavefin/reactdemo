@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MovieList from '../components/MovieList';
+import { MovieList, DisplayMsg} from '../components';
 import { Grid, Row } from 'react-bootstrap/lib';
 import { connect } from 'react-redux';
 import { fetchMovieList } from '../actions';
@@ -11,22 +11,20 @@ class MovieContainer extends Component {
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
-    dispatch(fetchMovieList());
+    if(!this.props.params.keyword){
+      const {dispatch} = this.props;
+      dispatch(fetchMovieList());
+    }
   }
 
   render() {
     const {movies} = this.props;
     if(movies.length > 0) {
       return(
-        <Grid fluid={false}>
-          <Row>
             <MovieList movies={movies} />
-          </Row>
-        </Grid>
       );
     } else
-      return null;
+      return (<DisplayMsg />);
   }
 }
 

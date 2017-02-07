@@ -53,7 +53,7 @@ class SearchBar extends Component {
       <Navbar bsStyle='inverse'>
         <Navbar.Header>
       <Navbar.Brand>
-        <a href="/"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
+        <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

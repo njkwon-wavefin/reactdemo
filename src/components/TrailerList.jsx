@@ -6,7 +6,7 @@ export default function TrailerList({data}) {
     let trailers = data.map(function(trailer) {
       return(
         <Col xs={12} sm={6} md={4} key={trailer.id} >
-          <Trailer trailer={trailer} />
+          <Trailer trailer={trailer.key} />
         </Col>
       );
     });

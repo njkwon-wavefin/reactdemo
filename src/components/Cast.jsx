@@ -9,3 +9,10 @@ export default function Cast({cast}) {
     </Thumbnail>
   );
 }
+
+Cast.propTypes = {
+  cast: React.PropTypes.shape({
+    profile_path: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+  })
+};

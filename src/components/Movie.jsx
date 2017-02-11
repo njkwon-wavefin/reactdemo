@@ -12,8 +12,7 @@ export default class Movie extends Component{
 
 export function MoviePoster(props){
   const style={
-    maxHeight: '350px',
-    width: 'auto'
+ 
   }
   return(
     <Image style={style} key={props.movie.id} src={URL_IMG+IMG_SIZE_LARGE+props.movie.poster_path} alt={props.movie.title} responsive={props.responsive} />

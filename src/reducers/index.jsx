@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import { routerReducer } from 'react-router-redux'
+import merge from 'lodash/merge'
 import {FETCH_MOVIES, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE, RESET_MOVIES,
   FETCH_MOVIE, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_FAILURE,
   FETCH_CASTS, FETCH_CASTS_SUCCESS, FETCH_CASTS_FAILURE,
@@ -16,34 +17,18 @@ const defaultStateList = {
 const movieList = (state = defaultStateList, action) => {
   switch (action.type){
     case FETCH_MOVIES:
-      return Object.assign({}, state, {
-        isFetching:true
-      });
-    case FETCH_MOVIES_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching:false,
-        items:action.data
-      });
-    case FETCH_MOVIES_FAILURE:
-      return Object.assign({}, state, {
-        isFetching:false,
-        error:action.data
-      });
-    case RESET_MOVIES:
-      return Object.assign({}, state, {
-        isFetching:false,
-        items:[],
-        error:{}
-      });
     case SEARCH_MOVIE:
-      return Object.assign({}, state, {
-        isFetching:true
-      });
+      // return Object.assign({}, state, {
+      //   isFetching:true
+      //});
+      return {...state, isFetching:true};
+    case FETCH_MOVIES_SUCCESS:
     case SEARCH_MOVIE_SUCCESS:
       return Object.assign({}, state, {
         isFetching:false,
         items:action.data
       });
+    case FETCH_MOVIES_FAILURE:
     case SEARCH_MOVIE_FAILURE:
       return Object.assign({}, state, {
         isFetching:false,

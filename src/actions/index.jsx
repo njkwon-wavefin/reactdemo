@@ -27,16 +27,18 @@ function enterSearchText(searchText){
   };
 }
 
-function searchMovie() {
+function searchMovie(searchText) {
   return {
-    type: SEARCH_MOVIE
+    type: SEARCH_MOVIE,
+    searchText
   };
 }
 
-function searchMovieSuccess(data) {
+function searchMovieSuccess(data, keyword) {
   return {
     type: SEARCH_MOVIE_SUCCESS,
-    data
+    data,
+    keyword
   };
 }
 
@@ -141,15 +143,19 @@ export function selectMovie(movie) {
 }
 
 // thunk action creators
-export function searchMovieList(text){
-  let url = URL_SEARCH + text + API_KEY_ALT;
+// export function loadList() {
+//     const list = getState().movieList;
+// }
+
+export function searchMovieList(keyword){
+  let url = URL_SEARCH + keyword + API_KEY_ALT;
   return function(dispatch){
-    dispatch(enterSearchText(text))
+    //dispatch(enterSearchText(text))
     dispatch(searchMovie())
     return fetch(url)
       .then(response => response.json())
       .then(json => json.results)
-      .then(data => dispatch(searchMovieSuccess(data)))
+      .then(data => dispatch(searchMovieSuccess(data,keyword)))
       .catch(error => dispatch(searchMovieFail(error)))
   }
 }

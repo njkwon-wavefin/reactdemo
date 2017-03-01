@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MovieList, DisplayMsg} from '../components';
 import { Grid, Row } from 'react-bootstrap/lib';
 import { connect } from 'react-redux';
-import { fetchMovieList } from '../actions';
+import { fetchMovieList, searchMovieList } from '../actions';
 
 class MovieContainer extends Component {
 
@@ -11,28 +11,49 @@ class MovieContainer extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.params.keyword){
+     if(!this.props.params.keyword){
       const {dispatch} = this.props;
       dispatch(fetchMovieList());
-    }
+     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+     const {dispatch} = this.props;
+     if(nextProps.location.pathname.includes('/search')) {
+       if(this.props.params.keyword !== nextProps.params.keyword) {
+           dispatch(searchMovieList(nextProps.params.keyword));
+        }
+     }
+  }
+
+
+  shouldComponentUpdate(nextProps, nextState){
+      if(this.props.movies !== nextProps.movies) {
+        console.log('shouldComponentUpdate');
+        return true;
+      }
+      return false;
   }
 
   render() {
+
     const {movies} = this.props;
     if(movies.length > 0) {
       return(
             <MovieList movies={movies} />
       );
-    } else
+    } else {
       return (<DisplayMsg />);
+    }
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
   const {movieList} = state;
   const {isFetcing_movieList, items: movies, error_movieList} = movieList;
 
-  return {movies}
+  const keyword = ownProps.params.keyword;
+  return {movies, keyword}
 }
 
 export default connect(mapStateToProps)(MovieContainer);

@@ -10,26 +10,23 @@ class SearchBar extends Component {
   constructor(props){
     super(props);
     this.state = { searchText: ''};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e){
+  handleChange = (e) => {
     this.setState({
       searchText: e.currentTarget.value
     });
   }
 
-  handleKeyDown(e){
+  handleKeyDown = (e) => {
     if(e.key == 'Enter') {
       return this.handleSubmit();
     }
   }
 
-  handleSubmit(){
+  handleSubmit = () => {
     this.props.dispatch(push('/search/'+ this.state.searchText));
-    this.props.dispatch(searchMovieList(this.state.searchText));
+    //this.props.dispatch(searchMovieList(this.state.searchText));
     this.setState({ searchText: ''});
   }
 

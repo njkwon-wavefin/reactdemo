@@ -78,3 +78,16 @@
   display: block;
   padding: 5px;
 }
+
+/*.search-container {
+  margin: 30px 0;
+  color: grey;
+  background: black;
+}
+
+// sm up
+@include media-breakpoint-up(sm) {
+  .search-container {
+    margin-top: 8px;
+  }
+}*/

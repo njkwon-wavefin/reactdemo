@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Navbar, FormGroup, FormControl, Button, Image } from 'react-bootstrap/lib'
+import { Navbar, FormGroup, FormControl, Button, Image, Row, Col } from 'react-bootstrap/lib'
 import TMDBlogo from '../images/themoviedb_green.svg'
 import logo from '../images/logo_square.svg'
 import { connect } from 'react-redux'
@@ -122,27 +122,21 @@ class SearchBar extends Component {
   return (
     <Navbar bsStyle='inverse'>
       <Navbar.Header>
-    <Navbar.Brand>
-      <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-      <Navbar.Collapse>
+        <Navbar.Brand>
+          <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
+        </Navbar.Brand>
+      </Navbar.Header>
       <Navbar.Form pullRight>
-        <FormGroup>
-            <Autosuggest
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionSelected={this.onSuggestionSelected}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={this.getSuggestionValue}
-              renderSuggestion={this.renderSuggestion}
-              inputProps={inputProps} />
-        </FormGroup>
-        {' '}
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionSelected={this.onSuggestionSelected}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps} />
       </Navbar.Form>
-    </Navbar.Collapse>
-  </Navbar>
+    </Navbar>
   );
 
   }

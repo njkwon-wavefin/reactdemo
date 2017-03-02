@@ -13,6 +13,7 @@ It uses open [The Movie Database (TMDb) API] (https://www.themoviedb.org/documen
 
 * List popular movies
 * Search movies by title
+* Auto-suggest movie title for search function
 * View detail movie info including poster, casts, trailers
 
 ## Technical Notes

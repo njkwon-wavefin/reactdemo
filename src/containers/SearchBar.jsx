@@ -119,9 +119,7 @@ class SearchBar extends Component {
     placeholder: 'Search Movie Title...'
   };
 
-
   return (
-
     <Navbar bsStyle='inverse'>
       <Navbar.Header>
     <Navbar.Brand>
@@ -132,7 +130,6 @@ class SearchBar extends Component {
       <Navbar.Collapse>
       <Navbar.Form pullRight>
         <FormGroup>
-
             <Autosuggest
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -141,13 +138,11 @@ class SearchBar extends Component {
               getSuggestionValue={this.getSuggestionValue}
               renderSuggestion={this.renderSuggestion}
               inputProps={inputProps} />
-
         </FormGroup>
         {' '}
       </Navbar.Form>
     </Navbar.Collapse>
   </Navbar>
-
   );
 
   }

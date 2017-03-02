@@ -14,17 +14,14 @@ class MovieContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
      const {dispatch} = this.props;
-    // if(nextProps.location.pathname.includes('/search')) {
        if(nextProps.params.keyword && this.props.params.keyword !== nextProps.params.keyword) {
            dispatch(searchMovieList(nextProps.params.keyword));
         }
-    // }
   }
 
 
   shouldComponentUpdate(nextProps, nextState){
       if(this.props.movies !== nextProps.movies) {
-        //console.log('shouldComponentUpdate');
         return true;
       }
       return false;

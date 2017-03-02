@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { MovieList, DisplayMsg} from '../components';
-import { Grid, Row } from 'react-bootstrap/lib';
 import { connect } from 'react-redux';
 import { fetchMovieList, searchMovieList } from '../actions';
 
 class MovieContainer extends Component {
-
-  constructor(props){
-    super(props);
-  }
 
   componentDidMount() {
      if(!this.props.params.keyword){
@@ -19,17 +14,17 @@ class MovieContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
      const {dispatch} = this.props;
-     if(nextProps.location.pathname.includes('/search')) {
-       if(this.props.params.keyword !== nextProps.params.keyword) {
+    // if(nextProps.location.pathname.includes('/search')) {
+       if(nextProps.params.keyword && this.props.params.keyword !== nextProps.params.keyword) {
            dispatch(searchMovieList(nextProps.params.keyword));
         }
-     }
+    // }
   }
 
 
   shouldComponentUpdate(nextProps, nextState){
       if(this.props.movies !== nextProps.movies) {
-        console.log('shouldComponentUpdate');
+        //console.log('shouldComponentUpdate');
         return true;
       }
       return false;

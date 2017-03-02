@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+//import createLogger from 'redux-logger';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -13,7 +13,7 @@ import './index.css';
 import { MovieContainer, MovieDetail } from './containers';
 import { DisplayMsg } from './components';
 
-const loggerMiddleware = createLogger();
+//const loggerMiddleware = createLogger();
 const routeMiddleware = routerMiddleware(hashHistory);
 let store = createStore(movieApp, composeWithDevTools(
   applyMiddleware(thunkMiddleware, routeMiddleware)));

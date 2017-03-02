@@ -10,6 +10,7 @@
     "loadash": "0.0.1",
     "lodash": "^4.17.4",
     "react": "^15.4.1",
+    "react-autosuggest": "^9.0.0",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.2",

@@ -16,16 +16,6 @@ export const FETCH_CASTS_FAILURE = 'FETCH_CASTS_FAILURE';
 export const FETCH_TRAILERS = 'FETCH_TRAILERS';
 export const FETCH_TRAILERS_SUCCESS = 'FETCH_TRAILERS_SUCCESS';
 export const FETCH_TRAILERS_FAILURE = 'FETCH_TRAILERS_FAILURE';
-export const SELECT_MOVIE = 'SELECT_MOVIE';
-export const ENTER_SEARCH_TEXT = 'ENTER_SEARCH_TEXT';
-
-// action creators
-function enterSearchText(searchText){
-  return {
-    type: ENTER_SEARCH_TEXT,
-    searchText
-  };
-}
 
 function searchMovie(searchText) {
   return {
@@ -66,12 +56,6 @@ function fetchMoviesFail(error) {
   return {
     type: FETCH_MOVIES_FAILURE,
     error
-  };
-}
-
-function fetchMoviesDone() {
-  return {
-    type: RESET_MOVIES
   };
 }
 
@@ -135,22 +119,9 @@ function fetchTrailersFail(error) {
   };
 }
 
-export function selectMovie(movie) {
-  return {
-    type: SELECT_MOVIE,
-    movie
-  };
-}
-
-// thunk action creators
-// export function loadList() {
-//     const list = getState().movieList;
-// }
-
 export function searchMovieList(keyword){
   let url = URL_SEARCH + keyword + API_KEY_ALT;
   return function(dispatch){
-    //dispatch(enterSearchText(text))
     dispatch(searchMovie())
     return fetch(url)
       .then(response => response.json())

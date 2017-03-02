@@ -1,34 +1,99 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {Navbar, FormGroup, FormControl, Button, Image} from 'react-bootstrap/lib';
-import TMDBlogo from '../images/themoviedb_green.svg';
-import { connect } from 'react-redux';
+import React, {Component} from 'react'
+import { Navbar, FormGroup, FormControl, Button, Image } from 'react-bootstrap/lib'
+import TMDBlogo from '../images/themoviedb_green.svg'
+import logo from '../images/logo_square.svg'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { searchMovieList } from '../actions';
+import Autosuggest from 'react-autosuggest'
+import theme from './search.css'
+import { URL_SEARCH, API_KEY_ALT, URL_IMG, IMG_SIZE_XSMALL} from '../const';
 
 class SearchBar extends Component {
   constructor(props){
     super(props);
-    this.state = { searchText: ''};
+    this.state = {
+      value: '',
+      suggestions:[]
+    };
   }
 
-  handleChange = (e) => {
+  onChange = (event, { newValue, method }) => {
     this.setState({
-      searchText: e.currentTarget.value
+      value: newValue
     });
-  }
+  };
 
-  handleKeyDown = (e) => {
-    if(e.key == 'Enter') {
-      return this.handleSubmit();
+  handleKeyDown = (event) => {
+    if(event.key == 'Enter') {
+      return this.handleSubmit(this.state.value);
     }
   }
 
-  handleSubmit = () => {
-    this.props.dispatch(push('/search/'+ this.state.searchText));
-    //this.props.dispatch(searchMovieList(this.state.searchText));
-    this.setState({ searchText: ''});
+  handleSubmit = (searchText) => {
+    this.props.dispatch(push('/search/'+ searchText));
+    this.setState({ value: ''});
   }
+
+
+  getSuggestionValue = (suggestion) => {
+    return suggestion.title;
+  };
+
+  onSuggestionsFetchRequested = ({ value }) => {
+      const trimmedValue = value.trim();
+
+      if (trimmedValue.length > 0) {
+          let url = URL_SEARCH + trimmedValue + API_KEY_ALT;
+            fetch(url)
+              .then(response => response.json())
+              .then(json => json.results)
+              .then(data => {
+                const results = data.map(movie => {
+                  let temp = {}
+                  temp.id = movie.id
+                  temp.title = movie.title
+                  temp.img = movie.poster_path
+                  temp.year = (movie.release_date == "") ? "0000" : movie.release_date.substring(0,4)
+                  return temp
+                });
+                this.setState({
+                 suggestions: results
+                });
+              }).catch(error => console.log('Exception to get Suggestions'))
+      }
+      else {
+        this.setState({
+          suggestions: []
+        })
+      }
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+  renderSuggestion = (suggestion) => {
+    return (
+      <a>
+      <img className="searchResult-image" src= {suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
+        <div className="searchResult-text">
+          <div className="searchResult-name">
+            {suggestion.title}
+          </div>
+          {suggestion.year}
+        </div>
+      </a>
+    );
+  };
+
+  onSuggestionSelected = (event, { suggestion, method }) => {
+    if (method === 'enter')
+      event.preventDefault();
+    this.props.dispatch(push('/movie/'+ suggestion.id));
+    this.setState({ value: ''});
+  };
 
   render(){
   const brandStyle = {
@@ -46,32 +111,45 @@ class SearchBar extends Component {
     display: 'inline-block'
   };
 
-    return (
-      <Navbar bsStyle='inverse'>
-        <Navbar.Header>
-      <Navbar.Brand>
-        <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-        <Navbar.Collapse>
-        <Navbar.Form pullRight>
-          <FormGroup>
-            <FormControl
-              type="text"
-              placeholder="Search Movie Title..."
-              value={this.state.searchText}
-              ref={(input) => this.searchTextInput = input}
-              onChange={this.handleChange}
-              onKeyPress={this.handleKeyDown}/>
-          </FormGroup>
-          {' '}
-          <Button type="submit" onClick={this.handleSubmit}>Search</Button>
-        </Navbar.Form>
-      </Navbar.Collapse>
-    </Navbar>
+  const {value, suggestions} = this.state;
+  const inputProps = {
+    value,
+    onChange: this.onChange,
+    onKeyPress: this.handleKeyDown,
+    placeholder: 'Search Movie Title...'
+  };
 
-    );
+
+  return (
+
+    <Navbar bsStyle='inverse'>
+      <Navbar.Header>
+    <Navbar.Brand>
+      <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
+    </Navbar.Brand>
+    <Navbar.Toggle />
+  </Navbar.Header>
+      <Navbar.Collapse>
+      <Navbar.Form pullRight>
+        <FormGroup>
+
+            <Autosuggest
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionSelected={this.onSuggestionSelected}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              getSuggestionValue={this.getSuggestionValue}
+              renderSuggestion={this.renderSuggestion}
+              inputProps={inputProps} />
+
+        </FormGroup>
+        {' '}
+      </Navbar.Form>
+    </Navbar.Collapse>
+  </Navbar>
+
+  );
+
   }
 }
 

@@ -1,6 +1,9 @@
-import React from 'react';
-import {MovieTitle, MovieRate, MovieVote, MovieYear, MovieGenre, MovieOverview } from './Movie';
-import {Row, Col} from 'react-bootstrap';
+import React from 'react'
+import Title from './Title'
+import SubTitle from './SubTitle'
+import SubTitleWithIcon from './SubTitleWithIcon'
+import Description from './Description'
+import {Row, Col} from 'react-bootstrap'
 
 export default function MovieInfo(props){
   const style = {
@@ -10,24 +13,21 @@ export default function MovieInfo(props){
     return(
       <div style={style}>
         <Row>
-          <MovieTitle title={props.movie.title} />
-        </Row>
-        <Row>
-          <MovieGenre genre={props.movie.genre} />
+          <Title title={props.movie.title} />
         </Row>
         <Row>
           <Col xs={4}>
-            <MovieRate rate={props.movie.vote_average} />
+            <SubTitleWithIcon icon={'star'} title={props.movie.vote_average} />
           </Col>
           <Col xs={4}>
-            <MovieVote vote={props.movie.vote_count} />
+            <SubTitleWithIcon icon={'heart'} title={props.movie.vote_count} />
           </Col>
           <Col xs={4}>
-            <MovieYear year={props.movie.release_date.substring(0,4)} />
+            <SubTitle title={props.movie.release_date.substring(0,4)} />
           </Col>
         </Row>
         <Row>
-          <MovieOverview overview={props.movie.overview} />
+          <Description category={'Overview'} description={props.movie.overview} />
         </Row>
       </div>
     );

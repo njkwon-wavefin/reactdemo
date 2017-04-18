@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MoviePoster, CastList, TrailerList} from '../components';
 import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
 import { Grid, Row, Col} from 'react-bootstrap/lib';
-import { MovieInfo } from '../components';
+import { MovieInfo, Poster } from '../components';
 import { connect } from 'react-redux';
 import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../actions';
 
@@ -43,7 +43,7 @@ class MovieDetail extends Component {
         <Grid fluid={false}>
           <Row>
             <Col xs={12} sm={6} md={4}>
-              <MoviePoster movie={movie} responsive />
+              <Poster id={movie.id} path={movie.poster_path} responsive />
             </Col>
             <Col xs={12} sm={6} md={8}>
               <MovieInfo movie={movie}/>

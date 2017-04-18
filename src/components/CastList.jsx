@@ -1,5 +1,6 @@
 import React from 'react';
 import Cast from './Cast';
+import {Link} from 'react-router';
 import { Col } from 'react-bootstrap';
 
 export default function CastList({data}) {
@@ -7,7 +8,7 @@ export default function CastList({data}) {
       if(cast.profile_path != null) {
         return(
           <Col xs={4} sm={3} md={2} key={cast.id} >
-            <Cast cast={cast} />
+            <Link to={'/star/'+cast.id} ><Cast cast={cast} /></Link>
           </Col>
         );
      }

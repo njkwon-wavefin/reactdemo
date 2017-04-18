@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 //import merge from 'lodash/merge'
 import {FETCH_MOVIES, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE,
   FETCH_MOVIE, FETCH_MOVIE_SUCCESS, FETCH_MOVIE_FAILURE,
+  FETCH_STAR_SUCCESS, FETCH_STAR_FAILURE,
   FETCH_CASTS, FETCH_CASTS_SUCCESS, FETCH_CASTS_FAILURE,
   FETCH_TRAILERS, FETCH_TRAILERS_SUCCESS, FETCH_TRAILERS_FAILURE,
   SEARCH_MOVIE, SEARCH_MOVIE_SUCCESS, SEARCH_MOVIE_FAILURE,
@@ -99,6 +100,23 @@ const movieDetail = (state = defaultState, action) => {
   }
 };
 
+const starDetail = (state = defaultState, action) => {
+  switch (action.type){
+    case FETCH_STAR_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching:false,
+        item:action.data
+      });
+    case FETCH_STAR_FAILURE:
+      return Object.assign({}, state, {
+        isFetching:false,
+        error:action.data
+      });
+    default:
+      return state;
+  }
+};
+
 const input = (state = '', action) => {
   switch (action.type){
     case ENTER_SEARCH_TEXT:
@@ -115,6 +133,7 @@ const movieApp = combineReducers({
   castList,
   trailerList,
   movieDetail,
+  starDetail,
   input,
   routing: routerReducer
 });

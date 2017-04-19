@@ -147,8 +147,10 @@ export function searchMovieList(keyword){
   }
 }
 
-export function fetchMovieList(){
-  const url = URL_LIST + API_KEY;
+export function fetchMovieList(option){
+  let url;
+  if(option) url = URL_LIST + API_KEY + '&with_cast=' + option;
+  else url = URL_LIST + API_KEY;
   return function(dispatch){
     dispatch(fetchMovies());
     return fetch(url)

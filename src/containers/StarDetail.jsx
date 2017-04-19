@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { StarInfo, CastList, TrailerList, Poster} from '../components';
+import { StarInfo, CastList, TrailerList, Poster, MovieList} from '../components';
 import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
+import SubTitle from '../components/SubTitle'
 import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { connect } from 'react-redux';
-import { fetchStarDetail } from '../actions';
+import { fetchStarDetail, fetchMovieList } from '../actions';
 
 class StarDetail extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchStarDetail(this.props.params.id));
+    dispatch(fetchMovieList(this.props.params.id));
   }
 
   render() {
-    const {star} = this.props;
-    console.log('star: ' + star);
+    const {star, movies} = this.props;
 
     if(star.hasOwnProperty('id')) {
       return(
@@ -28,7 +29,8 @@ class StarDetail extends Component {
             </Col>
           </Row>
           <Row>
-
+            <SubTitle title={'Known For'} />
+            <MovieList movies={movies.slice(0,4)} />
           </Row>
         </Grid>
       );
@@ -39,10 +41,11 @@ class StarDetail extends Component {
 }
 
 function mapStateToProps(state){
-  const {starDetail} = state;
+  const {starDetail, movieList} = state;
   const {item: star} = starDetail;
+  const {items: movies} = movieList;
 
-  return {star}
+  return {star, movies}
 }
 
 export default connect(mapStateToProps)(StarDetail);

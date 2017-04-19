@@ -18,11 +18,13 @@ export default function TrailerList({data}) {
     const titleStyle = {
       paddingLeft: '20px'
     };
-
-    return(
-      <div>
-        <h3 style={titleStyle}>Trailers</h3>
-        <div style={style}>{trailers}</div>
-      </div>
-    );
+    if (trailers.length != 0){
+      return(
+        <div>
+          <h3 style={titleStyle}>Trailers</h3>
+          <div style={style}>{trailers}</div>
+        </div>
+      );
+    } else
+      return null;
 }

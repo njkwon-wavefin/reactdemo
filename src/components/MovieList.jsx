@@ -16,7 +16,7 @@ export default class MovieList extends Component{
     }).map(function(movie) {
         return(
             <Col xs={6} sm={4} md={3} key={movie.id} >
-            <Link to={'/movie/'+movie.id} ><Poster id={movie.id} path={movie.poster_path} responsive /></Link>
+            <Link to={'/movie/'+movie.id} ><Poster info id={movie.id} path={movie.poster_path} title={movie.title} voteAverage={movie.vote_average} release_date={movie.release_date} responsive /></Link>
           </Col>
         );
     });

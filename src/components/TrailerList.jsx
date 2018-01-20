@@ -1,6 +1,6 @@
-import React from 'react';
-import Trailer from './Trailer';
-import { Col } from 'react-bootstrap';
+import React from 'react'
+import Trailer from './Trailer'
+import { Col } from 'react-bootstrap'
 
 export default function TrailerList({data}) {
     let trailers = data.map(function(trailer) {
@@ -18,6 +18,7 @@ export default function TrailerList({data}) {
     const titleStyle = {
       paddingLeft: '20px'
     };
+    
     if (trailers.length != 0){
       return(
         <div>

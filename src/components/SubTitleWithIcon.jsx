@@ -1,6 +1,5 @@
 import React from 'react';
 import { Glyphicon } from 'react-bootstrap'
-import styled from 'styled-components'
 
 export default function SubTitleWithIcon(props){
   return(

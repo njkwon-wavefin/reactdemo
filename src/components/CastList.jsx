@@ -10,14 +10,16 @@ export default function CastList({data}) {
       text-decoration:none;
     }
   `;
-    var casts = data.map(function(cast) {
+    let casts = data.map(function(cast) {
       if(cast.profile_path != null) {
         return(
           <Col xs={4} sm={3} md={2} key={cast.id} >
             <StyledLink to={'/star/'+cast.id} ><Cast cast={cast} /></StyledLink>
           </Col>
         );
-     }
+      }
+
+      return null;
     });
 
     return(

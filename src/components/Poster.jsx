@@ -1,6 +1,4 @@
-import React , { Component } from 'react';
-import SubTitle from './SubTitle'
-import SubTitleWithIcon from './SubTitleWithIcon'
+import React from 'react';
 import { URL_IMG, IMG_SIZE_LARGE } from '../const'
 import { Image } from 'react-bootstrap'
 import styled from 'styled-components'

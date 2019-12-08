@@ -16,7 +16,7 @@ export default function StarInfo(props){
         </Row>
         <Row>
           <Col xs={4}>
-            <SubTitle title={props.star.gender==1?'Female':'Male'} />
+            <SubTitle title={props.star.gender === 1 ? 'Female' : 'Male'} />
           </Col>
           <Col xs={8}>
             <SubTitle title={'Birthday ' + props.star.birthday} />

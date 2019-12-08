@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MoviePoster, CastList, TrailerList} from '../components';
+import { CastList, TrailerList} from '../components';
 import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
 import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { MovieInfo, Poster } from '../components';

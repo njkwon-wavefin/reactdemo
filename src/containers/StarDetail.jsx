@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StarInfo, CastList, TrailerList, Poster, MovieList} from '../components';
-import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
+import { StarInfo, Poster, MovieList} from '../components';
 import SubTitle from '../components/SubTitle'
 import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { connect } from 'react-redux';

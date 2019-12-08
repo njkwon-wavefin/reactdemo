@@ -6,8 +6,7 @@ import {FETCH_MOVIES, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE,
   FETCH_STAR_SUCCESS, FETCH_STAR_FAILURE,
   FETCH_CASTS, FETCH_CASTS_SUCCESS, FETCH_CASTS_FAILURE,
   FETCH_TRAILERS, FETCH_TRAILERS_SUCCESS, FETCH_TRAILERS_FAILURE,
-  SEARCH_MOVIE, SEARCH_MOVIE_SUCCESS, SEARCH_MOVIE_FAILURE,
-  ENTER_SEARCH_TEXT} from '../actions'
+  SEARCH_MOVIE, SEARCH_MOVIE_SUCCESS, SEARCH_MOVIE_FAILURE} from '../actions'
 
 const defaultStateList = {
   isFetching: false,
@@ -119,7 +118,7 @@ const starDetail = (state = defaultState, action) => {
 
 const input = (state = '', action) => {
   switch (action.type){
-    case ENTER_SEARCH_TEXT:
+    case SEARCH_MOVIE:
       return Object.assign({}, state, {
         isFetching:true
       });

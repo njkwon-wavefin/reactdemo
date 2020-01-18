@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import { Navbar, FormGroup, FormControl, Button, Image, Row, Col } from 'react-bootstrap/lib'
+import { Navbar, Image } from 'react-bootstrap/lib'
 import TMDBlogo from '../images/themoviedb_green.svg'
 import logo from '../images/logo_square.svg'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import Autosuggest from 'react-autosuggest'
-import theme from './search.css'
+import './search.css'
 import { URL_SEARCH, API_KEY_ALT, URL_IMG, IMG_SIZE_XSMALL} from '../const';
 
 class SearchBar extends Component {
@@ -24,7 +24,7 @@ class SearchBar extends Component {
   };
 
   handleKeyDown = (event) => {
-    if(event.key == 'Enter') {
+    if(event.key === 'Enter') {
       return this.handleSubmit(this.state.value);
     }
   }
@@ -53,11 +53,11 @@ class SearchBar extends Component {
                   temp.id = movie.id
                   temp.title = movie.title
                   temp.img = movie.poster_path
-                  temp.year = (movie.release_date == "") ? "0000" : movie.release_date.substring(0,4)
+                  temp.year = (movie.release_date === "") ? "0000" : movie.release_date.substring(0,4)
                   return temp
                 });
                 this.setState({
-                 suggestions: results
+                  suggestions: results
                 });
               }).catch(error => console.log('Exception to get Suggestions'))
       }
@@ -76,15 +76,15 @@ class SearchBar extends Component {
 
   renderSuggestion = (suggestion) => {
     return (
-      <a>
-      <img className="searchResult-image" src= {suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
+      <div>
+      <img alt="" className="searchResult-image" src= {suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
         <div className="searchResult-text">
           <div className="searchResult-name">
             {suggestion.title}
           </div>
           {suggestion.year}
         </div>
-      </a>
+      </div>
     );
   };
 
@@ -123,7 +123,7 @@ class SearchBar extends Component {
     <Navbar bsStyle='inverse'>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
+          <a href="#/"><span style={brandStyle}>{this.props.brand}</span><Image style={imgStyle} src={TMDBlogo}/></a>
         </Navbar.Brand>
       </Navbar.Header>
       <Navbar.Form pullRight>

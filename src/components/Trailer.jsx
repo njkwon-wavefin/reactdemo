@@ -6,7 +6,7 @@ import { URL_YOUTUBE } from '../const';
  * @param {string} trailer - the address of trailer for YouTube api
  */
 export default function Trailer({trailer}) {
-  return <iframe src={URL_YOUTUBE + trailer} allowFullScreen />;
+  return <iframe title={URL_YOUTUBE + trailer} src={URL_YOUTUBE + trailer} allowFullScreen />;
 }
 
 Trailer.propTypes = {

@@ -42,7 +42,7 @@ class MovieContainer extends Component {
 
 function mapStateToProps(state, ownProps){
   const {movieList} = state;
-  const {isFetcing_movieList, items: movies, error_movieList} = movieList;
+  const {items: movies} = movieList;
 
   const keyword = ownProps.params.keyword;
   return {movies, keyword}

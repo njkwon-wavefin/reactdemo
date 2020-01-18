@@ -18,8 +18,8 @@ export default function TrailerList({data}) {
     const titleStyle = {
       paddingLeft: '20px'
     };
-    
-    if (trailers.length != 0){
+
+    if (trailers.length !== 0){
       return(
         <div>
           <h3 style={titleStyle}>Trailers</h3>

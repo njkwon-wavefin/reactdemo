@@ -13,6 +13,7 @@ export default function TrailerList({data}) {
 
     const style = {
       marginTop: '15px'
+      
     };
 
     const titleStyle = {
@@ -23,7 +24,7 @@ export default function TrailerList({data}) {
       return(
         <div>
           <h3 style={titleStyle}>Trailers</h3>
-          <div style={style}>{trailers}</div>
+          <div className="row" style={style}>{trailers}</div>
         </div>
       );
     } else

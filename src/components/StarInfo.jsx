@@ -4,6 +4,7 @@ import Title from './Title'
 import SubTitle from './SubTitle'
 import {Row, Col} from 'react-bootstrap'
 
+
 export default function StarInfo(props){
   const style = {
     paddingLeft: '15px'

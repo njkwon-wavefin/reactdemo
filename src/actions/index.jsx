@@ -1,4 +1,4 @@
-import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_VIDEO, API_KEY, API_KEY_ALT} from '../const';
+import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_VIDEO, API_KEY, API_KEY_ALT, URL_RELATED} from '../const';
 // action types
 export const SEARCH_MOVIE = 'SEARCH_MOVIE';
 export const SEARCH_MOVIE_SUCCESS = 'SEARCH_MOVIE_SUCCESS';
@@ -18,6 +18,12 @@ export const FETCH_CASTS_FAILURE = 'FETCH_CASTS_FAILURE';
 export const FETCH_TRAILERS = 'FETCH_TRAILERS';
 export const FETCH_TRAILERS_SUCCESS = 'FETCH_TRAILERS_SUCCESS';
 export const FETCH_TRAILERS_FAILURE = 'FETCH_TRAILERS_FAILURE';
+// RELATED
+export const FETCH_RELATED = 'FETCH_RELATED';
+export const FETCH_RELATED_SUCCESS = 'FETCH_RELATED_SUCCESS';
+export const FETCH_RELATED_FAILURE = 'FETCH_RELATED_FAILURE';
+//
+
 
 function searchMovie(searchText) {
   return {
@@ -134,6 +140,28 @@ function fetchTrailersFail(error) {
     error
   };
 }
+//////// RELATED
+function fetchRelatedMovies() {
+  return {
+    type: FETCH_RELATED
+  };
+}
+
+function fetchRelatedMoviesSuccess(data) {
+  return {
+    type: FETCH_RELATED_SUCCESS,
+    data
+  };
+}
+
+function fetchRelatedMoviesFail(error) {
+  return {
+    type: FETCH_RELATED_FAILURE,
+    error
+  };
+}
+//////////////////
+
 
 export function searchMovieList(keyword){
   let url = URL_SEARCH + keyword + API_KEY_ALT;
@@ -194,6 +222,19 @@ export function fetchCastList(id){
       .catch(error => dispatch(fetchCastsFail(error)))
   }
 }
+
+//////////////////
+export function fetchRelatedDetail(id){
+  const url_related = URL_DETAIL + id + URL_RELATED + API_KEY;
+  return function(dispatch){
+    dispatch(fetchRelatedMovies())
+    return fetch(url_related)
+      .then(response => response.json())
+      .then(data => dispatch(fetchRelatedMoviesSuccess(data)))
+      .catch(error => dispatch(fetchRelatedMoviesFail(error)))
+  }
+}
+//////////////////
 
 export function fetchTrailerList(id){
   const url_trailers = URL_DETAIL + id + URL_VIDEO + API_KEY;

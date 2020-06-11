@@ -10,12 +10,14 @@ export default class MovieList extends Component{
 	display: 'flex',
 	flexWrap: 'wrap'
   }
+0
 
+// 
     let movies = this.props.movies.filter(function(movie) {
       return movie.poster_path != null;
     }).map(function(movie) {
         return(
-            <Col xs={6} sm={4} md={3} key={movie.id} >
+            <Col xs={6} sm={4} md={4} key={movie.id} >
             <Link to={'/movie/'+movie.id} ><Poster info id={movie.id} path={movie.poster_path} title={movie.title} voteAverage={movie.vote_average} release_date={movie.release_date} responsive /></Link>
           </Col>
         );

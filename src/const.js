@@ -13,7 +13,7 @@ export const IMG_SIZE_LARGE = 'w342/';
 export const CAST_MAX_NUM = 5;
 export const TRAILER_MAX_NUM = 3;
 //////
-export const RELATED_MAX_NUM = 5;
+export const RELATED_MAX_NUM = 6;
 export const URL_RELATED = '/similar';
 ///////
 

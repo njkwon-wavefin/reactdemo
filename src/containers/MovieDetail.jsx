@@ -36,8 +36,12 @@ class MovieDetail extends Component {
   //     return false;
   // }
 
+  
+  
+
   render() {
     const {movie, casts, trailers, related, isFetcing_movie, isFetcing_casts, isFetcing_trailers, isFetcing_related} = this.props;
+    console.log(this.props);
 
     if(isFetcing_movie || isFetcing_casts || isFetcing_trailers || isFetcing_related) {
       return <p>loading...</p>
@@ -59,7 +63,7 @@ class MovieDetail extends Component {
           </Row>
           {/* ////////// */}
           <Row>
-            <MovieList data={related.slice(0,RELATED_MAX_NUM)} />
+            <MovieList movies={related.results.slice(0,RELATED_MAX_NUM)} />
           </Row>
         </Grid>
       );

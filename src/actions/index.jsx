@@ -140,27 +140,7 @@ function fetchTrailersFail(error) {
     error
   };
 }
-//////// RELATED
-function fetchRelatedMovies() {
-  return {
-    type: FETCH_RELATED
-  };
-}
 
-function fetchRelatedMoviesSuccess(data) {
-  return {
-    type: FETCH_RELATED_SUCCESS,
-    data
-  };
-}
-
-function fetchRelatedMoviesFail(error) {
-  return {
-    type: FETCH_RELATED_FAILURE,
-    error
-  };
-}
-//////////////////
 
 
 export function searchMovieList(keyword){
@@ -222,6 +202,28 @@ export function fetchCastList(id){
       .catch(error => dispatch(fetchCastsFail(error)))
   }
 }
+
+//////// RELATED
+function fetchRelatedMovies() {
+  return {
+    type: FETCH_RELATED
+  };
+}
+
+function fetchRelatedMoviesSuccess(data) {
+  return {
+    type: FETCH_RELATED_SUCCESS,
+    data
+  };
+}
+
+function fetchRelatedMoviesFail(error) {
+  return {
+    type: FETCH_RELATED_FAILURE,
+    error
+  };
+}
+//////////////////
 
 //////////////////
 export function fetchRelatedDetail(id){

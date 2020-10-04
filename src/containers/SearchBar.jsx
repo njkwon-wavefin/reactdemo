@@ -17,29 +17,29 @@ class SearchBar extends Component {
     };
   }
 
-  onChange = (event, { newValue, method }) => {
+  onChange =(event, { newValue, method }) => {
     this.setState({
       value: newValue
     });
   };
 
-  handleKeyDown = (event) => {
+  handleKeyDown =(event) => {
     if(event.key === 'Enter') {
       return this.handleSubmit(this.state.value);
     }
   }
 
-  handleSubmit = (searchText) => {
+  handleSubmit =(searchText) => {
     this.props.dispatch(push('/search/'+ searchText));
     this.setState({ value: ''});
   }
 
 
-  getSuggestionValue = (suggestion) => {
+  getSuggestionValue =(suggestion) => {
     return suggestion.title;
   };
 
-  onSuggestionsFetchRequested = ({ value }) => {
+  onSuggestionsFetchRequested =({ value }) => {
       const trimmedValue = value.trim();
 
       if (trimmedValue.length > 0) {
@@ -68,16 +68,16 @@ class SearchBar extends Component {
       }
   }
 
-  onSuggestionsClearRequested = () => {
+  onSuggestionsClearRequested =() => {
     this.setState({
       suggestions: []
     });
   };
 
-  renderSuggestion = (suggestion) => {
+  renderSuggestion =(suggestion) => {
     return (
       <div>
-      <img alt="" className="searchResult-image" src= {suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
+      <img alt="" className="searchResult-image" src={suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
         <div className="searchResult-text">
           <div className="searchResult-name">
             {suggestion.title}
@@ -88,22 +88,22 @@ class SearchBar extends Component {
     );
   };
 
-  onSuggestionSelected = (event, { suggestion, method }) => {
-    if (method === 'enter')
+  onSuggestionSelected =(event, { suggestion, method }) => {
+    if (method==='enter')
       event.preventDefault();
     this.props.dispatch(push('/movie/'+ suggestion.id));
     this.setState({ value: ''});
   };
 
   render(){
-  const brandStyle = {
+  const brandStyle={
     fontWeight: 'bold',
     textTransform: 'caplitalize',
     paddingLeft: 10,
     fontSize: '1.2em'
   };
 
-  const imgStyle = {
+  const imgStyle={
     height: '200%',
     width: 'auto',
     paddingLeft: '10px',
@@ -111,8 +111,8 @@ class SearchBar extends Component {
     display: 'inline-block'
   };
 
-  const {value, suggestions} = this.state;
-  const inputProps = {
+  const {value, suggestions}=this.state;
+  const inputProps={
     value,
     onChange: this.onChange,
     onKeyPress: this.handleKeyDown,

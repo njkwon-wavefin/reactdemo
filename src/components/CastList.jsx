@@ -11,9 +11,10 @@ export default function CastList({data}) {
     }
   `;
     let casts = data.map(function(cast) {
+      console.log("cast", cast)
       if(cast.profile_path != null) {
         return(
-          <Col xs={4} sm={3} md={2} key={cast.id} >
+          <Col xs={4} sm={3} md={2}   key={cast.id}  >
             <StyledLink to={'/star/'+cast.id} ><Cast cast={cast} /></StyledLink>
           </Col>
         );
@@ -21,11 +22,13 @@ export default function CastList({data}) {
 
       return null;
     });
-
     return(
-      <div>
+      <div >
         <h3>Casts</h3>
+        <div className="d-flex flex-wrap">
         {casts}
+        </div>
+        
       </div>
     );
 }

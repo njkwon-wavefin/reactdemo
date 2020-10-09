@@ -11,7 +11,7 @@ export default function CastList({data}) {
     }
   `;
     let casts = data.map(function(cast) {
-      console.log("cast", cast)
+      // console.log("cast", cast)
       if(cast.profile_path != null) {
         return(
           <Col xs={4} sm={3} md={2}   key={cast.id}  >

@@ -4,7 +4,7 @@ import { URL_IMG, IMG_SIZE_XSMALL } from '../const';
 
 export default function Cast({cast}) {
   
-  console.log("path",cast.profile_path)
+  // console.log("path",cast.profile_path)
   return (
     <Thumbnail src={URL_IMG+IMG_SIZE_XSMALL+cast.profile_path} alt={cast.name}   >
       <p>{cast.name}</p>

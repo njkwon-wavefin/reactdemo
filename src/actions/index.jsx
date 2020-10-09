@@ -1,4 +1,4 @@
-import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_VIDEO, API_KEY, API_KEY_ALT} from '../const';
+import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_RELATED_MOVIE, URL_VIDEO, API_KEY, API_KEY_ALT} from '../const';
 // action types
 export const SEARCH_MOVIE = 'SEARCH_MOVIE';
 export const SEARCH_MOVIE_SUCCESS = 'SEARCH_MOVIE_SUCCESS';
@@ -15,6 +15,9 @@ export const FETCH_STAR_FAILURE = 'FETCH_STAR_FAILURE';
 export const FETCH_CASTS = 'FETCH_CASTS';
 export const FETCH_CASTS_SUCCESS = 'FETCH_CASTS_SUCCESS';
 export const FETCH_CASTS_FAILURE = 'FETCH_CASTS_FAILURE';
+export const FETCH_RELATED_MOVIE = 'FETCH_RELATED_MOVIE';
+export const FETCH_RELATED_MOVIE_SUCCESS = 'FETCH_RELATED_MOVIE_SUCCESS';
+export const FETCH_RELATED_MOVIE_FAILURE = 'FETCH_RELATED_MOVIE_FAILURE';
 export const FETCH_TRAILERS = 'FETCH_TRAILERS';
 export const FETCH_TRAILERS_SUCCESS = 'FETCH_TRAILERS_SUCCESS';
 export const FETCH_TRAILERS_FAILURE = 'FETCH_TRAILERS_FAILURE';
@@ -115,6 +118,26 @@ function fetchCastsFail(error) {
   };
 }
 
+function fetchRelatedMovies() {
+  return {
+    type: FETCH_RELATED_MOVIE
+  };
+}
+
+function fetchRelatedMoviesSuccess(data) {
+  return {
+    type: FETCH_RELATED_MOVIE_SUCCESS,
+    data
+  };
+}
+
+function fetchRelatedMoviesFail(error) {
+  return {
+    type: FETCH_RELATED_MOVIE_FAILURE,
+    error
+  };
+}
+
 function fetchTrailers() {
   return {
     type: FETCH_TRAILERS
@@ -195,6 +218,17 @@ export function fetchCastList(id){
   }
 }
 
+export function fetchRelatedMovieList(id){
+  const url_related_movies = URL_DETAIL + id + URL_RELATED_MOVIE + API_KEY;
+  return function(dispatch){
+    dispatch(fetchRelatedMovies())
+    return fetch(url_related_movies)
+      .then(response => response.json())
+      .then(json => json.results)
+      .then(data => dispatch( fetchRelatedMoviesSuccess(data)))
+      .catch(error => dispatch(fetchRelatedMoviesFail(error)))
+  }
+}
 export function fetchTrailerList(id){
   const url_trailers = URL_DETAIL + id + URL_VIDEO + API_KEY;
   return function(dispatch){

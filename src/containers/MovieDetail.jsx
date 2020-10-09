@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { CastList, TrailerList} from '../components';
-import { CAST_MAX_NUM, TRAILER_MAX_NUM } from '../const';
+import { CAST_MAX_NUM, TRAILER_MAX_NUM,MOVIE_MAX_NUM } from '../const';
 import { Grid, Row, Col} from 'react-bootstrap/lib';
 import { MovieInfo, Poster } from '../components';
 import { connect } from 'react-redux';
-import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../actions';
+import { fetchMovieDetail, fetchCastList, fetchTrailerList, fetchRelatedMovieList} from '../actions';
+import RelatedMovies from "../components/RelatedMovies";
+// import RelatedMovie from '../components/RelatedMovie';
 
 class MovieDetail extends Component {
 
@@ -12,6 +14,7 @@ class MovieDetail extends Component {
     const {dispatch} = this.props;
     dispatch(fetchMovieDetail(this.props.params.id));
     dispatch(fetchCastList(this.props.params.id));
+    dispatch(fetchRelatedMovieList(this.props.params.id));
     dispatch(fetchTrailerList(this.props.params.id));
   }
 
@@ -20,6 +23,7 @@ class MovieDetail extends Component {
      if(nextProps.params.id && this.props.params.id !== nextProps.params.id) {
          dispatch(fetchMovieDetail(nextProps.params.id));
          dispatch(fetchCastList(nextProps.params.id));
+         dispatch(fetchRelatedMovieList(nextProps.params.id));
          dispatch(fetchTrailerList(nextProps.params.id));
       }
   }
@@ -33,9 +37,9 @@ class MovieDetail extends Component {
   // }
 
   render() {
-    const {movie, casts, trailers, isFetcing_movie, isFetcing_casts, isFetcing_trailers} = this.props;
+    const {movie, related_movies, casts, trailers, isFetcing_movie, isFetcing_related_movies, isFetcing_casts, isFetcing_trailers} = this.props;
 
-    if(isFetcing_movie || isFetcing_casts || isFetcing_trailers) {
+    if(isFetcing_movie || isFetcing_casts || isFetcing_related_movies || isFetcing_trailers) {
       return <p>loading...</p>
     }
     if(movie.hasOwnProperty('id')) {
@@ -51,7 +55,12 @@ class MovieDetail extends Component {
             </Col>
           </Row>
           <Row>
-            <TrailerList data={trailers.slice(0,TRAILER_MAX_NUM)} />
+            <Col xs={12} sm={6} md={4}>
+              <TrailerList data={trailers.slice(0,TRAILER_MAX_NUM)} />
+            </Col>
+            <Col xs={12} sm={6} md={8}>
+              <RelatedMovies  data={related_movies.slice(0,MOVIE_MAX_NUM)}/>
+            </Col>
           </Row>
         </Grid>
       );
@@ -62,12 +71,13 @@ class MovieDetail extends Component {
 }
 
 function mapStateToProps(state){
-  const {movieDetail, castList, trailerList} = state;
+  const {movieDetail, castList, trailerList, RelatedMovieList} = state;
   const {isFetcing_movie, item: movie, error_movie} = movieDetail;
   const {isFetcing_casts, items: casts, error_casts} = castList;
+  const {isFetcing_related_movies, items: related_movies, error_related_movies} = RelatedMovieList;  
   const {isFetcing_trailers, items: trailers, error_trailers} = trailerList;
 
-  return {isFetcing_movie, movie, error_movie, isFetcing_casts, casts, error_casts, isFetcing_trailers, trailers, error_trailers}
+  return {isFetcing_movie, movie, error_movie, isFetcing_casts, casts, error_casts, isFetcing_related_movies, related_movies, error_related_movies, isFetcing_trailers, trailers, error_trailers}
 }
 
 export default connect(mapStateToProps)(MovieDetail);
